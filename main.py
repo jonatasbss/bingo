@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from tkinter import ttk
 from PIL import Image, ImageTk
 import imageio
 import pygame
@@ -86,9 +87,10 @@ def chamar_novo_numero():
 
 pygame.mixer.init()
 
-root = ThemedTk(theme="bootstrap")
+root = ThemedTk(theme="arc")
 root.title("Bingo")
-root.geometry("600x400")
+root.iconbitmap('img/logo-bingo.ico')
+root.geometry("600x500")
 
 frame = tk.Frame(root, bg="white")
 frame.pack(expand=True, padx=20, pady=20)
@@ -98,7 +100,7 @@ lbl_roleta.pack(pady=20)
 
 lbl_roleta_bolinha = tk.Label(frame, font=("Arial", 16, "bold"), bg="white")
 
-btn_chamar = tk.Button(frame, text="Chamar número", command=chamar_numero)
+btn_chamar = ttk.Button(frame, text="Chamar número", command=chamar_numero)
 btn_chamar.pack(pady=20)
 
 root.mainloop()

@@ -45,7 +45,7 @@ def mostrar_animacao_roleta():
     roleta_frames = [Image.fromarray(frame) for frame in roleta_frames]
 
     roleta_width, roleta_height = roleta_frames[0].size
-    resized_width = 400
+    resized_width = 300
     resized_height = int(roleta_height * resized_width / roleta_width)
 
     roleta_frames = [frame.resize((resized_width, resized_height), Image.BILINEAR) for frame in roleta_frames]
@@ -70,8 +70,8 @@ def mostrar_animacao_roleta():
 def mostrar_numero():
     lbl_roleta_bolinha.config(text=f"{letra} - {numero}")
     lbl_roleta_bolinha.config(font=("Arial", 32, "bold"))
-    lbl_roleta_bolinha.pack(pady=80)
-    lbl_roleta.pack_forget()  # Oculta o label do GIF
+    lbl_roleta_bolinha.grid(row=0, column=0, pady=80)
+    lbl_roleta.grid_forget()  # Oculta o label do GIF
 
 
 def tocar_audio():
@@ -80,27 +80,30 @@ def tocar_audio():
 
 
 def chamar_novo_numero():
-    # btn_chamar.config(state=tk.DISABLED)
-    lbl_roleta.pack()  # Exibe o label do GIF novamente
+    lbl_roleta.grid(row=0, column=0, pady=20)  # Exibe o label do GIF novamente
     chamar_numero()
 
 
 pygame.mixer.init()
 
-root = ThemedTk(theme="arc")
+root = ThemedTk(theme="arc")  # Substitua "equilux" pelo tema de sua preferência
+
 root.title("Bingo")
+root.geometry("600x430")
 root.iconbitmap('img/logo-bingo.ico')
-root.geometry("600x500")
+root.configure(bg='silver')
 
-frame = tk.Frame(root, bg="white")
-frame.pack(expand=True, padx=20, pady=20)
+frame = ttk.Frame(root, padding=20)
+frame.pack(expand=True)
 
-lbl_roleta = tk.Label(frame, bg="white")
-lbl_roleta.pack(pady=20)
+lbl_roleta = ttk.Label(frame)
 
-lbl_roleta_bolinha = tk.Label(frame, font=("Arial", 16, "bold"), bg="white")
+lbl_roleta_bolinha = ttk.Label(frame, font=("Arial", 16, "bold"))
 
 btn_chamar = ttk.Button(frame, text="Chamar número", command=chamar_numero)
-btn_chamar.pack(pady=20)
+
+lbl_roleta.grid(row=0, column=0, pady=20)
+btn_chamar.grid(row=1, column=0, pady=20)
+lbl_roleta_bolinha.grid(row=2, column=0, pady=80)
 
 root.mainloop()
